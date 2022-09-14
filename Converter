@@ -1,0 +1,31 @@
+import PySimpleGUI as sg
+
+layout = [
+    [sg.Text('Select the unit you wish to convert'), sg.Spin(['Km/h to Knots', 'Knots to Km/h'], key = 'units')],
+    [sg.Input(key='-INPUT-'),sg.Button('button', key='-BUTTON1-')],
+    [sg.Output(key='-OUTPUT-',size=(10,2))]
+]
+
+window = sg.Window('Converter', layout)
+
+while True:
+    event, values = window.read()
+
+    if event == sg.WIN_CLOSED:
+        break
+
+    if event == '-BUTTON1-' and values['units'] == 'Km/h to Knots':
+        input = values['-INPUT-']
+        if input.isnumeric() == False:
+            print('Please type a number')
+        value = round( float(input) * 0.54, 3)
+        print(f'{value} Knots')
+    if event == '-BUTTON1-' and values['units'] == 'Knots to Km/h':
+        input = values['-INPUT-']
+        if input.isnumeric() == False:
+            print('Please type a number')
+        value = round(float(input) * 1.85, 3)
+        print(f'{value}Km/h')
+
+
+window.close()
